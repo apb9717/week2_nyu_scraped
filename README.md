@@ -11,7 +11,13 @@ This feature returns a list of five random Paul Graham articles from his archive
 
 # Setup Instructions
 
-Install the necessary packages listed in requirements.txt with "pip install -r requirements.txt".
+First, set up a Python virtual environment by first running "python -m venv .venv" then running
+
+- ".venv\Scripts\activate" on Windows
+- "source .venv/bin/activate" on Mac
+
+Verify that the terminal prefix is (.venv) to demonstrate that you have successfully set up the virtual environment.
+Then, install the necessary packages listed in requirements.txt with "pip install -r requirements.txt".
 
 # Usage
 
