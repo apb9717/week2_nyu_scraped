@@ -1,8 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-import random
 
-## Function to randomly return articles from the parsed website.
+## Function to randomly return weather descriptions from the parsed website.
 def scrape_it(url, num_return = 5):
     try:
         response = requests.get(url)       
@@ -12,55 +11,30 @@ def scrape_it(url, num_return = 5):
         
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        article_list = soup.find_all('a')
+        weatherList = soup.find_all('li', class_='forecast-tombstone')
+        weatherDescList = []
 
-        articles = [item.text.strip() for item in article_list][1:-1]
-        return random.sample(articles, min(num_return, len(articles)))
-    except Exception as e:
-        print(f'An error has occurred: {e}')
-        return []
-
-## Helper function to return a dict of Article Titles as keys, and links as values
-def dict_return(url, num_return = 5):
-    try:
-        response = requests.get(url)       
-        if response.status_code != 200:
-            print(f'Failed to get the webpage: {response.status_code}')
-            return []
-        
-        soup = BeautifulSoup(response.text, 'html.parser')
-
-        article_list = soup.find_all('a')
-
-        #Get links and save them
-        link_list = []
-        for link in article_list:
-            link_list.append(link.get('href'))
-
-        link_list = link_list[1:]
-
-        articles = [item.text.strip() for item in article_list][1:-1]
-
-        article_dict = {}
-        counter = 0
-        for i in articles:
-            article_dict[i] = 'https://www.paulgraham.com/' + link_list[counter]
-            counter+=1
-
-        return article_dict
+        ## Find img alt descriptions of weather.
+        for i in weatherList:
+            x = str(i).find('img alt')
+            if x != -1:
+                endImgAlt = str(i)[x+ len('img alt="'):].find('"')
+                weatherDesc = str(i)[x+ len('img alt="'): endImgAlt + x+ len('img alt="')]
+                weatherDescList.append(weatherDesc)
+        return weatherDescList
+    
     except Exception as e:
         print(f'An error has occurred: {e}')
         return []
 
 def main():
-    url = 'https://www.paulgraham.com/articles.html'
-    article_list =  scrape_it(url)
-    article_dict = dict_return(url)
+    url = 'https://forecast.weather.gov/MapClick.php?lat=40.7324512&lon=-73.9892746'
+    weatherList =  scrape_it(url)
 
     ## Print out articles and their links
-    print("Here are some useful daily life tips you can read!")
-    for index, article in enumerate(article_list, 1):
-        print(f'{index}: {article} \n Link to article: {article_dict[article]}')
+    print("Here the week's forecast for New York City!")
+    for article in weatherList:
+        print(article)
 
 if __name__ == "__main__":
     main()
