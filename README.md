@@ -15,6 +15,8 @@ Install the necessary packages listed in requirements.txt with "pip install -r r
 
 # Usage
 
-# Pre-Requisites
+Simply run the program and five random articles will be generated in the print out.
 
 # Notes
+
+I sincerely hope nobody else used this website.
