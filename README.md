@@ -1,10 +1,13 @@
 # week2_NYU_Scraped
 
-A Python project to scrape free weather data from weather.gov, a highly-accurate yet severely underutilized data source.
+A Python project to scrape what startup founders consider to be some of the most valuable content online today: Paul Graham articles.
 
 # Overview
 
-This feature returns a forecast for the current day plus the following five days, including the following four days' night forecasts as well. It includes information on precipitation, temperature (in Fahrenheit), and wind speeds.
+This feature returns a list of five random Paul Graham articles from his archive. This helps
+
+- mitigate the decision paralysis that one might receive when they see the full list and
+- expose the user to articles they might not have otherwise found.
 
 # Setup Instructions
 
@@ -18,9 +21,8 @@ Then, install the necessary packages listed in requirements.txt with "pip instal
 
 # Usage
 
-Simply run the program and the forecast will be generated for New York City.
+Simply run the program and five random articles will be generated in the print out.
 
 # Notes
 
-I sincerely hope nobody else used this website.
-For the sake of usability, we simply set up the program to work for the NYC forecast, as lat/long are used in the URL. In a future iteration, using some library which converts a place name to coordinates, we could make the system more robust and have it apply for a wider variety of locations.
+I sincerely hope nobody else used this website. We had some back and forth throughout the process on what site to go with (in part due to the 25 point stipulation and in part based on what we were able to actually accomplish), but we felt that this had a somewhat high chance of being unique.
